@@ -265,8 +265,8 @@ function StatusBadge({ value }) {
     Closed: "bg-green-500/15 text-green-300 border-green-600/40",
   };
   return (
-    <span className={`px-2 py-1 text-xs rounded-full border ${map[value]}`}>
-      {value}
+    <span className={`inline-flex items-center px-2 py-1 text-xs rounded-full border whitespace-nowrap ${map[value]}`}>
+      {value === "InProgress" ? "In Progress" : value}
     </span>
   );
 }
