@@ -86,7 +86,7 @@ export default function AdminDashboard() {
   </div>
 
   <div className="overflow-x-auto">
-    <table className="min-w-full text-sm">
+    <table className="min-w-full text-smin-w-[900px] w-full text-sm">
       <thead className="bg-slate-800 text-gray-300">
         <tr>
           <th className="px-4 py-3 text-left">Title</th>

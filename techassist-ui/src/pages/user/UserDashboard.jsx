@@ -32,7 +32,7 @@ export default function UserDashboard() {
         const myTickets = await getMyTickets();
 
         setStats(dashboard);
-        setTickets(myTickets); // show only recent 5
+        setTickets(myTickets); 
       } catch (err) {
         console.error(err);
         toast.error("Failed to load dashboard data");
@@ -66,12 +66,7 @@ export default function UserDashboard() {
       <div className="bg-slate-900 border border-slate-800 rounded-xl">
         <div className="flex items-center justify-between p-4 border-b border-slate-800">
           <h2 className="text-lg font-semibold text-gray-200">Recent Tickets</h2>
-          <Link
-            to="/user/tickets"
-            className="text-sm text-blue-400 hover:underline"
-          >
-            View all
-          </Link>
+          
         </div>
 
         <div className="overflow-x-auto">
@@ -171,8 +166,8 @@ function StatusBadge({ value }) {
     Closed: "bg-green-500/15 text-green-300 border-green-600/40",
   };
   return (
-    <span className={`px-2 py-1 text-xs rounded-full border ${map[value]}`}>
-      {value}
+    <span className={`inline-flex items-center px-2 py-1 text-xs rounded-full border whitespace-nowrap ${map[value]}`}>
+      {value === "In Progress" ? "In Progress" : value}
     </span>
   );
 }
