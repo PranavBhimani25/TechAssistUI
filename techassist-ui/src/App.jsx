@@ -14,9 +14,8 @@ import Settings  from './pages/Settings'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -38,10 +37,7 @@ function App() {
         {/* User Routes */}
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/user/tickets/new" element={<CreateTicket />} />
-        <Route path="/user/tickets/:ticketId/replies" element={<TicketReplies />}
-
-
-/>
+        <Route path="/user/tickets/:ticketId/replies" element={<TicketReplies />}  />
 
       </Routes>
       <ToastContainer 

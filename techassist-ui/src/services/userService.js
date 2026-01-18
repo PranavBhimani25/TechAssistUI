@@ -7,10 +7,10 @@ export const getUserDashboardStats = async () => {
 
 export const getMyTickets = async () => {
     const res = await api.get("/Ticket/GetTicketBySpecificUser");
-    return res.data; // expect array of tickets
+    return res.data; 
 }
 
 export const getUserTicketReplies = async (ticketId) => {
     const res = await api.get(`/TicketReplies/GetRepliesForUserTicket/${ticketId}`);
-    return res.data; // expect { id, title, status, replies: [...] }
+    return res.data; 
 }

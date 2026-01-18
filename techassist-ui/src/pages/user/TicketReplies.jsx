@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import DashboardLayout from "../../layout/DashboardLayout";
+import ReplyModal from "../../components/ReplyModal";
+import { getReplies } from "../../services/replyService";
+import { addReply } from "../../services/replyService";
 import { getUserTicketReplies } from "../../services/userService";
 import {toast} from "react-toastify";
 
@@ -9,7 +12,10 @@ export default function TicketReplies() {
   const { ticketId } = useParams();
   const [ticket, setTicket] = useState(null);
   const [replies, setReplies] = useState([]);
+  const [reply, setReply] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
 
 
 useEffect(() => {
@@ -22,8 +28,6 @@ useEffect(() => {
         title: data.title,
         status: data.status,
       });
-
-      // ✅ SAFE
       setReplies(Array.isArray(data.replies) ? data.replies : []);
     } catch (err) {
       console.error(err);
@@ -34,12 +38,58 @@ useEffect(() => {
   })();
 }, [ticketId]);
 
+const handleReply = async () => {
+  if (!reply.trim()) return toast.error("Message cannot be empty");
+
+  try {
+    const newReply = await addReply(ticketId, reply.trim());
+
+    // ✅ instantly update UI
+    setReplies(prev => [
+      ...prev,
+      {
+        id: Date.now(), // temporary id
+        message: reply.trim(),
+        author: "You",
+        createdAt: new Date().toISOString()
+      }
+    ]);
+
+    setReply("");
+    setShowModal(false);
+    toast.success("Comment added");
+
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to send message");
+  }
+};
+
+
+const fetchRepliesSafe = async () => {
+  try {
+    const data = await getTicketReplies(ticketId);
+    setReplies(Array.isArray(data) ? data : []);
+  } catch (err) {
+    console.error("Fetch replies failed", err);
+  }
+};
+
+
+
 
   return (
     <DashboardLayout>
       <h1 className="text-2xl font-semibold mb-4 text-blue-400">
         Ticket Replies
       </h1>
+      <button
+        onClick={() => setShowModal(true)}
+        className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 mb-4 text-white"
+      >
+        Add Comment
+      </button>
+  
 
       {ticket && (
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 mb-6">
@@ -51,6 +101,16 @@ useEffect(() => {
           </p>
         </div>
       )}
+
+      {showModal && (
+      <ReplyModal
+        onClose={() => setShowModal(false)}
+        onSend={handleReply}
+        reply={reply}
+        setReply={setReply}
+      />
+    )}
+
 
       <div className="space-y-4">
   {loading ? (

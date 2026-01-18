@@ -9,7 +9,7 @@ export default function Topbar({ onMenuClick }) {
       </button>
 
       <h1 className="text-lg font-semibold text-gray-200">
-        TechAssist
+        {/* TechAssist */}
       </h1>
     </div>
   );

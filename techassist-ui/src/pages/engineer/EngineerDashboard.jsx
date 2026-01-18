@@ -81,6 +81,7 @@ function TicketTable({ tickets, onOpen }) {
             <th className="px-4 py-3">Priority</th>
             <th className="px-4 py-3">Status</th>
             <th className="px-4 py-3">Action</th>
+            <th className="px-4 py-3">View Replay</th>
           </tr>
         </thead>
         <tbody>
@@ -98,6 +99,14 @@ function TicketTable({ tickets, onOpen }) {
                   Open
                 </button>
               </td>
+              <th>
+                <button
+                  onClick={() => window.open(`/user/tickets/${t.id}/replies`)}
+                  className="text-blue-400 hover:underline"
+                >
+                  Open
+                </button>
+              </th>
             </tr>
           ))}
         </tbody>

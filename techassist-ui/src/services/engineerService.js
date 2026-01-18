@@ -12,7 +12,7 @@ export const updateTicketStatus = async (id, status) =>
   });
 
 export const addReply = async (ticketId, message) =>
-  api.post(`/TicketReplies/${ticketId}`, message, // ✅ RAW STRING
+  api.post(`/TicketReplies/${ticketId}`, message, 
     {
       headers: {
         "Content-Type": "application/json",
