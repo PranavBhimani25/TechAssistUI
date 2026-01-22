@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "../../layout/DashboardLayout";
 import { createTicket } from "../../services/ticketService";
 import { getProducts } from "../../services/commonService";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const PRIORITIES = ["Low", "Medium", "High"];
 
@@ -12,6 +12,7 @@ export default function CreateTicket() {
     description: "",
     productId: "",
     priority: "Medium",
+    image: null,
   });
   const [products, setProducts] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
@@ -47,13 +48,15 @@ export default function CreateTicket() {
     if (!form.productId) return toast.error("Please select a product");
     if (!PRIORITIES.includes(form.priority)) return toast.error("Invalid priority");
 
-    const payload = {
-      title: form.title.trim(),
-      description: form.description.trim(),
-      productId: Number(form.productId),
-      priority: form.priority,
-      // Status, CreatorId & CreatedAt come from backend
-    };
+    const payload = new FormData();
+    payload.append("Title", form.title.trim());
+    payload.append("Description", form.description.trim());
+    payload.append("ProductId", form.productId);
+    payload.append("Priority", form.priority);
+
+    if (form.image) {
+      payload.append("Image", form.image);
+    }
 
     setSubmitting(true);
     try {
@@ -61,9 +64,7 @@ export default function CreateTicket() {
       toast.success("Ticket created successfully");
       toast.info(`Ticket ID: ${created.id}`);
       // Reset or redirect
-      setForm({ title: "", description: "", productId: "", priority: "Medium" });
-      // Optional: redirect user to "My Tickets"
-      // window.location.href = "/user/tickets";
+      setForm({ title: "", description: "", productId: "", priority: "Medium",image: null });
     } catch (err) {
       console.error(err);
       const msg = err?.response?.data?.message || "Failed to create ticket";
@@ -159,6 +160,23 @@ export default function CreateTicket() {
                   </option>
                 ))}
               </select>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-gray-300 mb-1">Attachment</label>
+              <input className="file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-violet-50 file:text-violet-700
+                hover:file:bg-violet-100"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
+              />
+              <p className="text-xs text-gray-400 mt-1">
+                {form.image ? form.image.name : "Upload an image related to the issue."}
+              </p>
             </div>
           </div>
 

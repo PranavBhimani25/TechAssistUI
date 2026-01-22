@@ -62,7 +62,7 @@ export default function AdminDashboard() {
       <h1 className="text-2xl font-semibold mb-6 text-blue-400">
         Admin Dashboard
       </h1>
-
+      
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <StatCard label="Total Tickets" value={stats.totalTickets} loading={loading} />

@@ -20,7 +20,7 @@ export default function TicketReplies() {
 
 useEffect(() => {
   (async () => {
-    try {
+    try {        
       const data = await getUserTicketReplies(ticketId);
 
       setTicket({
@@ -43,12 +43,10 @@ const handleReply = async () => {
 
   try {
     const newReply = await addReply(ticketId, reply.trim());
-
-    // ✅ instantly update UI
     setReplies(prev => [
       ...prev,
       {
-        id: Date.now(), // temporary id
+        id: Date.now(),
         message: reply.trim(),
         author: "You",
         createdAt: new Date().toISOString()
@@ -66,14 +64,14 @@ const handleReply = async () => {
 };
 
 
-const fetchRepliesSafe = async () => {
-  try {
-    const data = await getTicketReplies(ticketId);
-    setReplies(Array.isArray(data) ? data : []);
-  } catch (err) {
-    console.error("Fetch replies failed", err);
-  }
-};
+// const fetchRepliesSafe = async () => {
+//   try {
+//     const data = await getTicketReplies(ticketId);
+//     setReplies(Array.isArray(data) ? data : []);
+//   } catch (err) {
+//     console.error("Fetch replies failed", err);
+//   }
+// };
 
 
 

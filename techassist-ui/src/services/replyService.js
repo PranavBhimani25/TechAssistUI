@@ -8,12 +8,16 @@ export const getUserTicketReplies = async (ticketId) => {
     return res.data; // expect { id, title, status, replies: [...] }
 }
 
+export const getEngTicketReplies = async (ticketId) => {
+    const res = await api.get(`/TicketReplies/GetRepliesForEngTicket/${ticketId}`);
+    return res.data; // expect { id, title, status, replies: [...] }
+}
+
 export const addReply = async (ticketId, message) =>
   api.post(`/TicketReplies/${ticketId}`, message, 
     {
       headers: {
         "Content-Type": "application/json",
       },
-
     }
   );
