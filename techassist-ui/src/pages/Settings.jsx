@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "../layout/DashboardLayout";
 import { getMyProfile, updateMyProfile } from "../services/commonService";
-import {toast} from "react-toastify";
+import {toast} from "react-hot-toast";
 
 export default function Settings() {
   const [form, setForm] = useState({

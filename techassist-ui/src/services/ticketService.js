@@ -9,4 +9,9 @@ export const createTicket = async (payload) => {
   return res.data;
 };
 
+export const getTicketById = async (ticketId) => {
+  const res = await api.get(`/Ticket/GetTicketById/${ticketId}`);
+  return res.data;
+};
+
 

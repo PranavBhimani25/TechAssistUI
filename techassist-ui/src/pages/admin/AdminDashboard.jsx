@@ -6,7 +6,8 @@ import {
   getEngineersName,
   assignTicket
 } from "../../services/adminService";
-import {toast} from "react-toastify";
+import { Link } from "react-router-dom";
+import {toast} from "react-hot-toast";
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -96,6 +97,7 @@ export default function AdminDashboard() {
           <th className="px-4 py-3 text-left">Status</th>
           <th className="px-4 py-3 text-left">Created</th>
           <th className="px-4 py-3 text-left">Action</th>
+          <th className="px-4 py-3 text-left">View</th>
         </tr>
       </thead>
       <tbody>
@@ -124,6 +126,12 @@ export default function AdminDashboard() {
                 >
                   {t.engineer === "Unassigned" ? "Assign" : "Reassign"}
                 </button>
+              </td>
+              <td className="px-4 py-3">
+                <Link
+                  to={`/tickets/${t.id}`}
+                  className="text-blue-400 hover:underline"> View Ticket
+                </Link>
               </td>
             </tr>
           ))

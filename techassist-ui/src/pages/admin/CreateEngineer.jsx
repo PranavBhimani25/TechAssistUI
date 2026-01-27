@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DashboardLayout from "../../layout/DashboardLayout";
 import { createEngineer } from "../../services/adminService";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function CreateEngineer() {
   const [form, setForm] = useState({

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "../../layout/DashboardLayout";
 import { createTicket } from "../../services/ticketService";
 import { getProducts } from "../../services/commonService";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 const PRIORITIES = ["Low", "Medium", "High"];
 

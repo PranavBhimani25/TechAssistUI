@@ -78,6 +78,7 @@ export default function UserDashboard() {
                 <th className="px-4 py-3 text-left">Status</th>
                 <th className="px-4 py-3 text-left">Created</th>
                 <th className="px-4 py-3 text-left">View Replies</th>
+                <th className="px-4 py-3 text-left">View Ticket</th>
               </tr>
             </thead>
             <tbody>
@@ -102,6 +103,12 @@ export default function UserDashboard() {
                         className="text-blue-400 hover:underline"
                       >
                         View Replies
+                      </Link>
+                      </td>
+                      <td className="px-4 py-3">
+                      <Link
+                        to={`/tickets/${t.id}`}
+                        className="text-blue-400 hover:underline"> View Ticket
                       </Link>
                       </td>
                   </tr>

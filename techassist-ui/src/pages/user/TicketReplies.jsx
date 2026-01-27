@@ -5,7 +5,7 @@ import ReplyModal from "../../components/ReplyModal";
 import { getReplies } from "../../services/replyService";
 import { addReply } from "../../services/replyService";
 import { getUserTicketReplies } from "../../services/userService";
-import {toast} from "react-toastify";
+import {toast} from "react-hot-toast";
 
 
 export default function TicketReplies() {

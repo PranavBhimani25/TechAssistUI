@@ -2,18 +2,23 @@
 import React, { useState } from "react";
 import AuthLayout from "../layout/AuthLayout";
 import { registerUser } from "../services/authService";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    fullname: "",
+    fullName: "",
     email: "",
     password: "",
   });
   const [message, setMessage] = useState("");
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,12 +43,11 @@ export default function Register() {
           <label className="block text-sm text-gray-300 mb-1">Full Name</label>
           <input
             type="text"
-            name="name"
-            placeholder="John Doe"
-            value={formData.name}
+            name="fullName"
+            placeholder="Full Name"
+            value={formData.fullName}
             onChange={handleChange}
-            className="w-full px-4 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200"
-            required
+            className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
           />
         </div>
 

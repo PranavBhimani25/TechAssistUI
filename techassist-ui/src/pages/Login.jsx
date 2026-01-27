@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import AuthLayout from "../layout/AuthLayout";
 import { loginUser } from "../services/authService";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });

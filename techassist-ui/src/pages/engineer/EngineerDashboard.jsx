@@ -6,7 +6,8 @@ import {
   updateTicketStatus,
   addReply,
 } from "../../services/engineerService";
-import {toast} from "react-toastify";
+import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export default function EngineerDashboard() {
   const [stats, setStats] = useState({});
@@ -82,6 +83,7 @@ function TicketTable({ tickets, onOpen }) {
             <th className="px-4 py-3">Status</th>
             <th className="px-4 py-3">Action</th>
             <th className="px-4 py-3">View Replay</th>
+            <th className="px-4 py-3">View Ticket</th>
           </tr>
         </thead>
         <tbody>
@@ -99,14 +101,20 @@ function TicketTable({ tickets, onOpen }) {
                   Open
                 </button>
               </td>
-              <th>
+              <td className="px-4 py-3">
                 <button
                   onClick={() => window.open(`/user/tickets/${t.id}/replies`)}
                   className="text-blue-400 hover:underline"
                 >
                   Open
                 </button>
-              </th>
+              </td>
+              <td className="px-4 py-3">
+                <Link
+                  to={`/tickets/${t.id}`}
+                  className="text-blue-400 hover:underline"> View Ticket
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

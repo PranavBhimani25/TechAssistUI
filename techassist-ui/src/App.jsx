@@ -10,9 +10,11 @@ import UsersPage from './pages/admin/UsersPage'
 import EngineersPage from './pages/admin/EngineersPage'
 import CreateTicket from './pages/user/CreateTicket'
 import TicketReplies from './pages/user/TicketReplies'
+import TicketDetails from './pages/ticket/TicketDetails'
 import Settings  from './pages/Settings'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
+// import { ToastContainer } from 'react-toastify'
+import {Toaster} from 'react-hot-toast'
 
 
 function App() {
@@ -39,8 +41,14 @@ function App() {
         <Route path="/user/tickets/new" element={<CreateTicket />} />
         <Route path="/user/tickets/:ticketId/replies" element={<TicketReplies />}  />
 
+        <Route path="/tickets/:ticketId" element={<TicketDetails />} />
+
       </Routes>
-      <ToastContainer 
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
+      {/* <ToastContainer 
         position="top-right" 
         autoClose={3000}
         hideProgressBar={false}
@@ -50,7 +58,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      /> */}
     </BrowserRouter>
 
   )
